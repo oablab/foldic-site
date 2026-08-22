@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A bug report that tells me nothing about you — Foldic Notes</title>
+  <meta name="description" content="Apple's privacy model means I cannot go and look at what happened on your device. So a report has to come from you — and the question becomes what that report is allowed to know.">
+  <meta property="og:title" content="A bug report that tells me nothing about you">
+  <meta property="og:description" content="Apple's privacy model means I cannot go and look at what happened on your device. So a report has to come from you — and the question becomes what that report is allowed to know.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://foldic.app/notes/nothing-about-you/og-en.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://foldic.app/notes/nothing-about-you/og-en.png">
+  <meta property="og:url" content="https://foldic.app/notes/nothing-about-you/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="/icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <style>
+    :root {
+      --green: #A9B64B;
+      --green-deep: #3A4A26;
+      --green-tint: #E4E6D0;
+      --ink: #2E3B20;
+      --muted: #6E7A5B;
+      --bg: #F5F3EA;
+      --card: #EFEDDE;
+      --border: rgba(58, 74, 38, 0.16);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --green: #A9B64B;
+        --green-deep: #C3CE72;
+        --green-tint: #2A3319;
+        --ink: #EDEFDC;
+        --muted: #A3AC88;
+        --bg: #171C0F;
+        --card: #202716;
+        --border: rgba(169, 182, 75, 0.2);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 860px; margin: 0 auto; padding: 0.9rem 1.5rem;
+      backdrop-filter: saturate(180%) blur(16px);
+      gap: 0.75rem; flex-wrap: wrap;
+    }
+    nav .brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 1.05rem; text-decoration: none; color: var(--ink); }
+    nav .brand img { width: 28px; height: 28px; border-radius: 7px; }
+    .lang-switch {
+      display: inline-flex; gap: 0.25rem;
+      padding: 0.22rem; border-radius: 999px;
+      background: var(--card); border: 1px solid var(--border);
+    }
+    .lang-switch button {
+      font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--muted);
+      background: none; border: 0; cursor: pointer;
+      padding: 0.3rem 0.75rem; border-radius: 999px;
+    }
+    .lang-switch button[aria-selected="true"] {
+      background: var(--bg); color: var(--ink);
+      box-shadow: 0 1px 3px rgba(46, 59, 32, 0.14);
+    }
+    main { max-width: 680px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+    main[hidden] { display: none; }
+    .back { display: inline-block; color: var(--muted); text-decoration: none; font-size: 0.88rem; margin-bottom: 1.6rem; }
+    .back:hover { color: var(--green-deep); }
+    h1 {
+      font-size: clamp(1.9rem, 4.6vw, 2.5rem);
+      line-height: 1.15; letter-spacing: -0.015em; font-weight: 700;
+    }
+    .byline { color: var(--muted); font-size: 0.9rem; margin-top: 0.7rem; }
+    h2 {
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em;
+      margin: 2.6rem 0 0.8rem;
+    }
+    p { margin-top: 1rem; font-size: 1.02rem; }
+    .lede { font-size: 1.1rem; }
+    ul { margin-top: 0.8rem; padding-left: 1.3rem; }
+    li { margin-bottom: 0.6rem; }
+    li::marker { color: var(--green); }
+    strong { color: var(--green-deep); }
+    code {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 0.86em; background: var(--card);
+      border: 1px solid var(--border); border-radius: 5px; padding: 0.08em 0.35em;
+    }
+    figure.shot { margin: 2rem 0; }
+    figure.shot img {
+      width: 100%; height: auto; display: block;
+    }
+    figure.shot figcaption {
+      color: var(--muted); font-size: 0.85rem; text-align: center;
+      margin-top: 0.4rem;
+    }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.6rem 0 0; }
+    .callout {
+      background: var(--green-tint); border-radius: 14px;
+      padding: 1.1rem 1.4rem; margin-top: 2.4rem;
+      font-size: 1.02rem;
+    }
+    .callout strong { color: var(--green-deep); }
+    .outro { color: var(--muted); font-size: 0.95rem; }
+    .outro a { color: var(--green-deep); }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.2rem 1.5rem; text-align: center;
+      color: var(--muted); font-size: 0.88rem;
+    }
+    footer a { color: var(--green-deep); text-decoration: none; margin: 0 0.4rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="/"><img src="/icon.png" alt="" width="28" height="28">Foldic</a>
+    <div class="lang-switch" role="tablist" aria-label="Language">
+      <button type="button" role="tab" data-lang-tab="en" aria-selected="true">EN</button>
+      <button type="button" role="tab" data-lang-tab="zh" aria-selected="false">中文</button>
+      <button type="button" role="tab" data-lang-tab="ja" aria-selected="false">日本語</button>
+      <button type="button" role="tab" data-lang-tab="ko" aria-selected="false">한국어</button>
+    </div>
+  </nav>
+
+  <!-- ============================== EN ============================== -->
+  <main data-lang-page="en">
+    <a class="back" href="/notes/">← Notes</a>
+    <h1>A bug report that tells me nothing about you</h1>
+    <p class="byline">August 22, 2026 · Foldic development notes</p>
+
+    <p class="lede">Apple's privacy model is strict in a way I am glad about: I cannot reach into your device and look at what happened. Which means when Foldic gets something wrong, the only way I learn about it is if you tell me. That turns a comfortable question into an uncomfortable one — not "how do I collect diagnostics", but "what is a diagnostic report allowed to know about you?"</p>
+
+      <h2>A log is more personal than it looks</h2>
+      <p>Foldic keeps a plain-text log of what it did: which album it compared, which file it wrote, how long each took, what the filesystem said when something failed. Read one line and it looks harmless. Read the whole file and it is a description of somebody's life. Album titles are the names of their children, their trips, their dead relatives. File names carry the same. The destination path contains the name they gave their drive, which is often their own name, and the account they log in as.</p>
+      <p>And yet the parts I actually need are none of those. I need sizes, durations, error codes, memory figures, and the order things happened in. The useful half and the private half sit on the same line.</p>
+
+      <h2>Pseudonyms, not deletion</h2>
+      <p>The obvious move is to strip the names out. I did not, because it would have cost me a bug I have already had to fix. An album once aborted an entire scan on someone's Mac, and the album's <em>title was the bug</em>: 502 bytes long, padded with an invisible character to get past a spam filter, longer than the filesystem would accept as a folder name. If the report had removed that title, the report would have been useless.</p>
+      <p>So every name is replaced by a short token, and a legend at the top of the report records the shape of what it stood for — how many bytes, whether it was plain ASCII — without the content. I get to see that something was 502 bytes and not plain text. I do not get to see what it said.</p>
+
+      <h2>The token comes from the album's own identifier</h2>
+      <p>My first attempt numbered them: <code>album#1</code>, <code>album#2</code>, in the order they appeared. That works for one report and falls apart across two, because the same album is #3 in the morning and #7 in the afternoon and I cannot line them up.</p>
+      <p>Now the token is cut from the identifier Photos already gave that album — <code>album-4C5010FC</code>. It is stable across reports on the same device, which is what lets me follow one album through a week of them. It also solves something I did not expect: an album deleted last week is gone from the library, but the log still names it, and Foldic's own record of where that album's folder went is keyed by the same identifier. So even the deleted ones get a token instead of leaking.</p>
+      <p>File names get the same treatment from the other direction. <code>IMG_8136-992A6B204A32.jpg</code> becomes <code>photo-992A6B204A32.jpg</code>: the identifier half was never personal and is already in the log, so keeping it means I can still follow one file across lines. The extension stays, because a HEIC, a MOV and a JPEG fail in different ways.</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/report.png" alt="Two numbered steps. The address is copied first because the share sheet can attach the report but cannot fill in a recipient — on any platform." width="332" height="720" loading="lazy">
+        <figcaption>Two numbered steps. The address is copied first because the share sheet can attach the report but cannot fill in a recipient — on any platform.</figcaption>
+      </figure>
+
+      <h2>Two steps, because the order is not guessable</h2>
+      <p>Getting the report to me turned out to be the fiddly part, for a reason that is invisible until you hit it: <strong>the share sheet can attach a file but cannot fill in a recipient.</strong> Not on iOS, not on macOS, not with any API. The routes that <em>can</em> fill in an address — <code>mailto:</code>, Gmail's web compose — cannot carry an attachment.</p>
+      <p>My first version was a row of four buttons, and it was unusable: nothing told you which to press or in what order. It is two numbered steps now. Step one copies the address. Step two shares the report and says, in the step's own text, to paste the address into the To field. That sentence is the whole trick, and without it people share the report and then sit in front of an empty recipient line.</p>
+
+      <h2>What it does not promise</h2>
+      <p>The redaction is best effort and the app says so rather than claiming to be complete. The album titles are exact, because Foldic knows them — but a title that is a single common word can still match text that was never a title, and a title shorter than two characters is deliberately not used as a pattern at all, because it would match half the log.</p>
+      <p>Which is why the report is shown to you, in full, before it goes anywhere. That is the actual guarantee. A redaction whose result you can read is worth more than one that claims perfection and cannot be checked — and nothing is ever sent automatically, by any path, at any time.</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/log.png" alt="The log the way you see it, with your own album names intact. The report is the redacted version of this." width="332" height="720" loading="lazy">
+        <figcaption>The log the way you see it, with your own album names intact. The report is the redacted version of this.</figcaption>
+      </figure>
+
+      <h2>Privacy first, then experience</h2>
+      <p>This is the first reporting interface I have designed, and it took longer than the feature it serves. The balance it is trying to strike — enough for me to fix the bug, nothing that describes you — is the balance I want every part of this app to be judged on. Protecting the person comes first; making the app pleasant comes second. In this case the two turned out not to conflict at all: the report that tells me least about you is also the one that gets your problem fixed fastest, because it puts the sizes and the timings and the error codes where I can read them in one pass.</p>
+      <div class="callout"><strong>When can you use this?</strong> Report to Developer ships with version 0.8.4, on Mac and iPhone, reached from the log button at the top left. The same design is going into my other apps.</div>
+  </main>
+
+  <!-- ============================== ZH ============================== -->
+  <main data-lang-page="zh" hidden>
+    <a class="back" href="/notes/">← 開發筆記</a>
+    <h1>一份不會告訴我你是誰的錯誤報告</h1>
+    <p class="byline">2026 年 8 月 22 日 · Foldic 開發筆記</p>
+
+    <p class="lede">Apple 的隱私模型嚴格得讓我心安:我沒有辦法伸手進你的裝置去看發生了什麼。也就是說,Foldic 出錯的時候,我唯一能知道的途徑是你告訴我。這把一個舒服的問題換成了一個不舒服的問題——不是「我怎麼蒐集診斷資訊」,而是「一份診斷報告可以知道關於你的什麼?」</p>
+
+      <h2>記錄檔比看起來私密得多</h2>
+      <p>Foldic 會留一份純文字記錄:比對了哪個相簿、寫入了哪個檔案、各花多久、失敗時檔案系統說了什麼。單看一行,無害。看完整份,那是一個人生活的描述。相簿名稱是他們孩子的名字、旅程的名字、已故親人的名字。檔名也一樣。目的地路徑裡有他們給硬碟取的名字——常常就是自己的名字——以及登入用的帳號。</p>
+      <p>而我真正需要的完全不是那些。我需要檔案大小、耗時、錯誤碼、記憶體數字,以及事情發生的順序。有用的那一半和私密的那一半,寫在同一行上。</p>
+
+      <h2>代號,而不是刪除</h2>
+      <p>直覺做法是把名稱拿掉。我沒有,因為那會讓我失去一個已經修過的 bug。曾經有一個相簿讓某位使用者的整次掃描中止,而那個相簿的<em>標題本身就是 bug</em>:502 bytes 長,用一個看不見的字元填充來繞過垃圾訊息過濾,長度超過檔案系統能接受的資料夾名稱。如果報告把那個標題移除了,報告就沒有用了。</p>
+      <p>所以每個名稱都換成一個簡短代號,而報告開頭的圖例會記下它的「形狀」——幾個 byte、是不是純 ASCII——但不記內容。我看得到某個東西是 502 bytes 而且不是純文字。我看不到它寫了什麼。</p>
+
+      <h2>代號來自相簿自己的識別碼</h2>
+      <p>我第一版是編號:<code>album#1</code>、<code>album#2</code>,按出現順序。這在單一報告裡可行,跨兩份就散了,因為同一個相簿早上是 #3、下午是 #7,我對不起來。</p>
+      <p>現在代號是從 Photos 本來就給那個相簿的識別碼裁下來的——<code>album-4C5010FC</code>。它在同一台裝置上跨報告穩定,這才讓我能在一週的報告裡追同一個相簿。它還順手解了一件我沒預期的事:上週被刪掉的相簿,圖庫裡已經不存在,但記錄檔還提到它,而 Foldic 自己記錄「那個相簿的資料夾去了哪裡」用的是同一個識別碼。所以連被刪掉的那些也拿到代號,而不是外洩。</p>
+      <p>檔名從另一個方向做同樣的事。<code>IMG_8136-992A6B204A32.jpg</code> 變成 <code>photo-992A6B204A32.jpg</code>:識別碼那一半本來就不是個資、本來就在記錄檔裡,保留它我才能跨行追同一個檔案。副檔名留著,因為 HEIC、MOV 和 JPEG 的失敗方式不同。</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/report.png" alt="兩個編號的步驟。先複製地址,是因為分享面板能帶附件但不能填收件人——任何平台都不行。" width="332" height="720" loading="lazy">
+        <figcaption>兩個編號的步驟。先複製地址,是因為分享面板能帶附件但不能填收件人——任何平台都不行。</figcaption>
+      </figure>
+
+      <h2>兩個步驟,因為順序猜不出來</h2>
+      <p>把報告送到我手上,反而是最麻煩的部分,原因在你撞到之前完全看不見:<strong>分享面板能帶附件,但不能填收件人。</strong>iOS 不行,macOS 不行,任何 API 都不行。而<em>能</em>填地址的那些路徑——<code>mailto:</code>、Gmail 的網頁撰寫——不能帶附件。</p>
+      <p>我的第一版是一排四個按鈕,結果完全不能用:沒有任何東西告訴你該按哪個、按什麼順序。現在是兩個編號的步驟。步驟一複製地址。步驟二分享報告,並且在步驟的文字裡直接說:把地址貼到收件人欄位。那一句話就是整個關鍵,少了它,人們會把報告分享出去,然後對著空白的收件人欄位發呆。</p>
+
+      <h2>它不承諾的事</h2>
+      <p>去識別化是盡力而為,而 App 就這樣寫,不宣稱完整。相簿標題是精確的,因為 Foldic 知道它們——但一個標題如果是常見的單字,還是可能命中從來不是標題的文字;而短於兩個字元的標題刻意完全不當作替換模式,因為那會命中半個記錄檔。</p>
+      <p>這正是為什麼報告會完整地先給你看。那才是真正的保證。<strong>一份你讀得到結果的去識別化,比一份宣稱完美卻無法檢查的更有價值</strong>——而且任何路徑、任何時候,都不會自動傳送任何東西。</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/log.png" alt="你自己看到的記錄,相簿名稱原封不動。報告是這份內容去識別化之後的版本。" width="332" height="720" loading="lazy">
+        <figcaption>你自己看到的記錄,相簿名稱原封不動。報告是這份內容去識別化之後的版本。</figcaption>
+      </figure>
+
+      <h2>先隱私,再體驗</h2>
+      <p>這是我第一次設計回報介面,花的時間比它服務的那個功能還長。它想取的平衡——足夠讓我修好 bug,但不描述你——就是我希望這個 App 每個部分都被拿來檢驗的平衡。保護使用者優先,提升體驗其次。而這次結果是兩者根本不衝突:那份最少告訴我關於你的報告,同時也是最快讓你的問題被修好的那一份,因為它把大小、時間和錯誤碼放在我一眼就讀得到的地方。</p>
+      <div class="callout"><strong>這什麼時候能用?</strong>「回報給開發者」隨 0.8.4 版上線,Mac 與 iPhone 都有,從左上角的記錄按鈕進入。同樣的設計也會進到我其他的 App。</div>
+  </main>
+
+  <!-- ============================== JA ============================== -->
+  <main data-lang-page="ja" hidden>
+    <a class="back" href="/notes/">← 開発ノート</a>
+    <h1>あなたのことを何も伝えないバグレポート</h1>
+    <p class="byline">2026年8月22日 · Foldic 開発ノート</p>
+
+    <p class="lede">Apple のプライバシーモデルは、私にとってありがたいほど厳しくできています。開発者があなたの端末に手を伸ばして何が起きたかを見ることはできません。つまり Foldic が何かを間違えたとき、私がそれを知る道はあなたが教えてくれることだけです。すると問いは楽なものから厄介なものに変わります。「どう診断情報を集めるか」ではなく、「診断レポートはあなたについて何を知ってよいのか」です。</p>
+
+      <h2>ログは見た目より私的です</h2>
+      <p>Foldic は自分がしたことをテキストで記録します。どのアルバムを比べ、どのファイルを書き、それぞれ何秒かかり、失敗したときファイルシステムが何と言ったか。一行だけ見れば無害です。ファイル全体を読むと、それは誰かの生活の記述になります。アルバム名は子どもの名前、旅の名前、亡くなった人の名前です。ファイル名も同じです。保存先のパスには、その人がドライブに付けた名前——多くの場合その人自身の名前——とログイン名が含まれます。</p>
+      <p>ところが私が本当に必要なのは、そのどれでもありません。サイズ、所要時間、エラーコード、メモリの数値、そして何がどの順で起きたか。役に立つ半分と私的な半分が、同じ行に並んでいます。</p>
+
+      <h2>削除ではなく、記号に</h2>
+      <p>素直な手は名前を取り除くことです。そうしませんでした。すでに直した不具合を、自分から手放すことになるからです。あるアルバムが、あるお客様の Mac でスキャン全体を中断させたことがあります。そしてそのアルバムの<em>タイトルこそが不具合でした</em>。502 バイト、スパムフィルタを抜けるために見えない文字で埋められ、フォルダ名としてファイルシステムが受け付ける長さを超えていました。レポートがそのタイトルを削っていたら、レポートは役に立たなかったでしょう。</p>
+      <p>そこで、すべての名前は短い記号に置き換わり、レポート冒頭の凡例がその「形」——何バイトか、素の ASCII だったか——を、中身なしで記録します。502 バイトで素のテキストではなかったことは分かります。何と書かれていたかは分かりません。</p>
+
+      <h2>記号はアルバム自身の識別子から</h2>
+      <p>最初は番号を振りました。<code>album#1</code>、<code>album#2</code>、出てきた順です。一通のレポートなら成り立ちますが、二通になると崩れます。同じアルバムが朝は #3、午後は #7 で、突き合わせられません。</p>
+      <p>いまは Photos がそのアルバムに与えている識別子から切り出しています——<code>album-4C5010FC</code>。同じ端末なら複数のレポートをまたいで安定するので、一週間分のレポートで同じアルバムを追えます。思っていなかった副産物もありました。先週削除されたアルバムはライブラリにもう存在しませんが、ログはまだその名を含んでいて、Foldic 自身の「そのアルバムのフォルダがどこへ行ったか」の記録は同じ識別子で引かれています。だから削除済みのものにも記号が付き、漏れません。</p>
+      <p>ファイル名は逆方向から同じことをします。<code>IMG_8136-992A6B204A32.jpg</code> は <code>photo-992A6B204A32.jpg</code> になります。識別子の側はもともと私的ではなくログにも入っているので、残しておけば一つのファイルを行をまたいで追えます。拡張子も残します。HEIC と MOV と JPEG では壊れ方が違うからです。</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/report.png" alt="番号のついた二つの手順。先に宛先をコピーするのは、共有シートがファイルは添付できても宛先は入れられないからです。どのプラットフォームでもそうです。" width="332" height="720" loading="lazy">
+        <figcaption>番号のついた二つの手順。先に宛先をコピーするのは、共有シートがファイルは添付できても宛先は入れられないからです。どのプラットフォームでもそうです。</figcaption>
+      </figure>
+
+      <h2>手順が二つあるのは、順番が推測できないから</h2>
+      <p>レポートを私に届ける部分が、いちばん厄介でした。ぶつかるまで見えない理由があります。<strong>共有シートはファイルを添付できますが、宛先を入れることはできません。</strong>iOS でも macOS でも、どの API でもです。そして宛先を<em>入れられる</em>経路——<code>mailto:</code>、Gmail のウェブ作成画面——は添付を運べません。</p>
+      <p>最初の版はボタンが四つ並んでいて、まったく使えませんでした。どれをどの順で押すのか、何も教えてくれないのです。いまは番号のついた二手順です。手順 1 で宛先をコピー。手順 2 でレポートを共有し、その手順の文中で「宛先欄にアドレスを貼り付けてください」と言います。この一文が全部です。これがないと、人はレポートを共有したあと、空の宛先欄の前で止まります。</p>
+
+      <h2>約束していないこと</h2>
+      <p>匿名化は最善の努力であり、アプリはそう書いています。完全だとは言いません。アルバム名は正確です。Foldic が知っているからです。しかしありふれた一語のタイトルは、タイトルではなかった文字列に当たることがあり、二文字未満のタイトルは意図的にまったく使いません。ログの半分に当たってしまうからです。</p>
+      <p>だからレポートは、どこかへ行く前に全文をあなたに見せます。それが本当の保証です。<strong>結果を読める匿名化のほうが、完全だと主張して確かめられないものより価値があります</strong>——そして、どの経路でも、いつでも、自動送信されるものはありません。</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/log.png" alt="あなたが見るログ。アルバム名はそのままです。レポートはこれを匿名化したものです。" width="332" height="720" loading="lazy">
+        <figcaption>あなたが見るログ。アルバム名はそのままです。レポートはこれを匿名化したものです。</figcaption>
+      </figure>
+
+      <h2>まずプライバシー、次に体験</h2>
+      <p>報告のための画面を設計したのは初めてで、それが支える機能そのものより時間がかかりました。取ろうとしている均衡——私が不具合を直せるだけの情報、あなたを描写しない情報——は、このアプリのどの部分についても問われてほしい均衡です。人を守ることが先、心地よさは次。今回はその二つがまったく衝突しませんでした。あなたについて最も語らないレポートが、あなたの問題をいちばん早く直せるレポートでもあったのです。サイズと時間とエラーコードを、私が一度で読める場所に置いてくれるからです。</p>
+      <div class="callout"><strong>いつ使えますか?</strong>「開発者に報告」はバージョン 0.8.4 で、Mac と iPhone の両方に入ります。左上のログボタンから開けます。同じ設計を私のほかのアプリにも入れていきます。</div>
+  </main>
+
+  <!-- ============================== KO ============================== -->
+  <main data-lang-page="ko" hidden>
+    <a class="back" href="/notes/">← 개발 노트</a>
+    <h1>당신에 대해 아무것도 알려주지 않는 버그 리포트</h1>
+    <p class="byline">2026년 8월 22일 · Foldic 개발 노트</p>
+
+    <p class="lede">Apple의 프라이버시 모델은 제가 고맙게 여길 만큼 엄격합니다. 개발자가 당신의 기기에 손을 뻗어 무슨 일이 있었는지 볼 수는 없습니다. 즉 Foldic이 무언가를 잘못했을 때 제가 그것을 알 수 있는 길은 당신이 알려 주는 것뿐입니다. 그러면 질문이 편한 것에서 불편한 것으로 바뀝니다. '어떻게 진단 정보를 모을까'가 아니라 '진단 리포트가 당신에 대해 무엇을 알아도 되는가'입니다.</p>
+
+      <h2>로그는 보이는 것보다 사적입니다</h2>
+      <p>Foldic은 자신이 한 일을 일반 텍스트로 기록합니다. 어떤 앨범을 비교했고, 어떤 파일을 썼고, 각각 얼마나 걸렸고, 실패했을 때 파일 시스템이 무엇이라고 했는지. 한 줄만 보면 무해합니다. 파일 전체를 읽으면 그것은 어떤 사람의 삶에 대한 서술입니다. 앨범 이름은 아이의 이름, 여행의 이름, 세상을 떠난 사람의 이름입니다. 파일 이름도 마찬가지입니다. 저장 위치 경로에는 그 사람이 드라이브에 붙인 이름 — 흔히 본인의 이름 — 과 로그인 계정이 들어 있습니다.</p>
+      <p>그런데 제가 실제로 필요한 것은 그중 어느 것도 아닙니다. 크기, 소요 시간, 오류 코드, 메모리 수치, 그리고 무엇이 어떤 순서로 일어났는지입니다. 쓸모 있는 절반과 사적인 절반이 같은 줄에 함께 있습니다.</p>
+
+      <h2>삭제가 아니라 기호로</h2>
+      <p>당연한 선택은 이름을 지우는 것입니다. 그렇게 하지 않았습니다. 이미 고친 버그를 스스로 놓아 버리는 일이 되기 때문입니다. 어떤 앨범이 한 고객의 Mac에서 스캔 전체를 중단시킨 적이 있고, 그 앨범의 <em>제목이 곧 버그였습니다</em>. 502바이트 길이에, 스팸 필터를 통과하려고 보이지 않는 문자로 채워져 있었고, 파일 시스템이 폴더 이름으로 받아들이는 길이를 넘었습니다. 리포트가 그 제목을 지웠다면 리포트는 쓸모없었을 것입니다.</p>
+      <p>그래서 모든 이름은 짧은 기호로 바뀌고, 리포트 맨 위의 범례가 그 '모양' — 몇 바이트인지, 순수 ASCII였는지 — 을 내용 없이 기록합니다. 무언가가 502바이트였고 순수 텍스트가 아니었다는 것은 알 수 있습니다. 무엇이라고 적혀 있었는지는 알 수 없습니다.</p>
+
+      <h2>기호는 앨범 자신의 식별자에서</h2>
+      <p>처음에는 번호를 붙였습니다. <code>album#1</code>, <code>album#2</code>, 나온 순서대로. 리포트 한 장이면 되지만 두 장이 되면 무너집니다. 같은 앨범이 아침에는 #3, 오후에는 #7이어서 맞춰 볼 수 없습니다.</p>
+      <p>이제 기호는 Photos가 그 앨범에 이미 부여한 식별자에서 잘라 냅니다 — <code>album-4C5010FC</code>. 같은 기기라면 여러 리포트에 걸쳐 안정적이어서, 일주일 분량의 리포트에서 같은 앨범을 따라갈 수 있습니다. 예상하지 못한 것도 해결됐습니다. 지난주에 삭제된 앨범은 보관함에 더 이상 없지만 로그는 여전히 그 이름을 담고 있고, '그 앨범의 폴더가 어디로 갔는지'에 대한 Foldic 자신의 기록은 같은 식별자로 찾습니다. 그래서 삭제된 것들도 유출되지 않고 기호를 받습니다.</p>
+      <p>파일 이름은 반대 방향에서 같은 일을 합니다. <code>IMG_8136-992A6B204A32.jpg</code>는 <code>photo-992A6B204A32.jpg</code>가 됩니다. 식별자 쪽은 애초에 사적이지 않고 로그에도 이미 있으므로, 남겨 두면 한 파일을 여러 줄에 걸쳐 따라갈 수 있습니다. 확장자도 남깁니다. HEIC와 MOV와 JPEG는 다르게 실패하기 때문입니다.</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/report.png" alt="번호가 붙은 두 단계. 주소를 먼저 복사하는 이유는 공유 시트가 파일은 첨부할 수 있어도 받는 사람은 채울 수 없기 때문입니다. 어느 플랫폼에서나 그렇습니다." width="332" height="720" loading="lazy">
+        <figcaption>번호가 붙은 두 단계. 주소를 먼저 복사하는 이유는 공유 시트가 파일은 첨부할 수 있어도 받는 사람은 채울 수 없기 때문입니다. 어느 플랫폼에서나 그렇습니다.</figcaption>
+      </figure>
+
+      <h2>단계가 둘인 이유는 순서를 짐작할 수 없기 때문</h2>
+      <p>리포트를 제게 보내는 부분이 가장 까다로웠습니다. 부딪히기 전에는 보이지 않는 이유가 있습니다. <strong>공유 시트는 파일을 첨부할 수 있지만 받는 사람을 채울 수는 없습니다.</strong> iOS에서도, macOS에서도, 어떤 API로도 그렇습니다. 그리고 주소를 <em>채울 수 있는</em> 경로 — <code>mailto:</code>, Gmail 웹 작성 — 는 첨부를 나를 수 없습니다.</p>
+      <p>첫 버전은 버튼 네 개가 한 줄에 있었고, 전혀 쓸 수 없었습니다. 무엇을 어떤 순서로 눌러야 하는지 아무것도 알려 주지 않았습니다. 이제는 번호가 붙은 두 단계입니다. 1단계에서 주소를 복사합니다. 2단계에서 리포트를 공유하고, 그 단계의 문장 안에서 '받는 사람 칸에 주소를 붙여넣어 주세요'라고 말합니다. 그 한 문장이 전부입니다. 그것이 없으면 사람들은 리포트를 공유한 뒤 빈 받는 사람 칸 앞에서 멈춥니다.</p>
+
+      <h2>약속하지 않는 것</h2>
+      <p>익명화는 최선의 노력이며, 앱은 완전하다고 주장하지 않고 그렇게 적어 둡니다. 앨범 제목은 정확합니다. Foldic이 알고 있기 때문입니다. 그러나 흔한 한 단어인 제목은 제목이 아니었던 문자열에 걸릴 수 있고, 두 글자보다 짧은 제목은 의도적으로 아예 사용하지 않습니다. 로그의 절반에 걸리기 때문입니다.</p>
+      <p>그래서 리포트는 어디로 가기 전에 전문을 당신에게 보여 줍니다. 그것이 진짜 보증입니다. <strong>결과를 읽을 수 있는 익명화가, 완전하다고 주장하면서 확인할 수 없는 것보다 가치 있습니다</strong> — 그리고 어떤 경로로도, 어떤 순간에도 자동으로 전송되는 것은 없습니다.</p>
+
+      <figure class="shot">
+        <img src="/notes/nothing-about-you/log.png" alt="당신이 보는 로그. 앨범 이름은 그대로입니다. 리포트는 이것을 익명화한 버전입니다." width="332" height="720" loading="lazy">
+        <figcaption>당신이 보는 로그. 앨범 이름은 그대로입니다. 리포트는 이것을 익명화한 버전입니다.</figcaption>
+      </figure>
+
+      <h2>프라이버시가 먼저, 경험은 그다음</h2>
+      <p>보고용 화면을 설계한 것은 처음이고, 그것이 뒷받침하는 기능 자체보다 시간이 더 걸렸습니다. 맞추려 한 균형 — 제가 버그를 고칠 만큼의 정보, 당신을 묘사하지 않는 정보 — 은 이 앱의 어느 부분에 대해서도 물어 주셨으면 하는 균형입니다. 사람을 보호하는 것이 먼저, 앱을 쾌적하게 만드는 것이 다음입니다. 이번에는 그 둘이 전혀 충돌하지 않았습니다. 당신에 대해 가장 적게 말하는 리포트가, 당신의 문제를 가장 빨리 고치는 리포트이기도 했습니다. 크기와 시간과 오류 코드를 제가 한 번에 읽을 수 있는 자리에 놓아 주기 때문입니다.</p>
+      <div class="callout"><strong>언제 쓸 수 있나요?</strong> '개발자에게 보고'는 버전 0.8.4에서 Mac과 iPhone 모두에 들어갑니다. 왼쪽 위 로그 버튼에서 열립니다. 같은 설계를 제 다른 앱에도 넣어 갈 예정입니다.</div>
+  </main>
+
+  <footer>
+    © 2026 Foldic · <a href="/">foldic.app</a> · <a href="/notes/">Notes</a> · <a href="/privacy/">Privacy</a> · <a href="mailto:tautiu.dev@gmail.com">Support</a>
+  </footer>
+
+  <script>
+    (function () {
+      var LANGS = ["en", "zh", "ja", "ko"];
+      var HTML_LANG = { en: "en", zh: "zh-Hant", ja: "ja", ko: "ko" };
+      var TITLES = {
+          en: "A bug report that tells me nothing about you",
+          zh: "一份不會告訴我你是誰的錯誤報告",
+          ja: "あなたのことを何も伝えないバグレポート",
+          ko: "당신에 대해 아무것도 알려주지 않는 버그 리포트",
+        };
+
+      function setLang(lang, remember) {
+        if (LANGS.indexOf(lang) === -1) lang = "en";
+        document.documentElement.lang = HTML_LANG[lang];
+        document.title = TITLES[lang];
+        document.querySelectorAll("[data-lang-page]").forEach(function (page) {
+          page.hidden = page.getAttribute("data-lang-page") !== lang;
+        });
+        document.querySelectorAll("[data-lang-tab]").forEach(function (tab) {
+          tab.setAttribute("aria-selected", String(tab.getAttribute("data-lang-tab") === lang));
+        });
+        if (remember) {
+          try { localStorage.setItem("foldic-release-lang", lang); } catch (e) {}
+        }
+      }
+
+      document.querySelectorAll("[data-lang-tab]").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          setLang(tab.getAttribute("data-lang-tab"), true);
+        });
+      });
+
+      var initial = null;
+      var param = new URLSearchParams(location.search).get("lang");
+      if (param && LANGS.indexOf(param) !== -1) initial = param;
+      if (!initial) {
+        try { initial = localStorage.getItem("foldic-release-lang"); } catch (e) {}
+      }
+      if (!initial) {
+        var sitePath = null;
+        try { sitePath = localStorage.getItem("foldic-lang"); } catch (e) {}
+        if (sitePath === "/zh/") initial = "zh";
+        else if (sitePath === "/ja/") initial = "ja";
+        else if (sitePath === "/ko/") initial = "ko";
+        else if (sitePath === "/") initial = "en";
+      }
+      if (!initial) {
+        var langs = navigator.languages && navigator.languages.length
+          ? navigator.languages : [navigator.language || ""];
+        for (var i = 0; i < langs.length && !initial; i++) {
+          if (/^zh/i.test(langs[i])) initial = "zh";
+          else if (/^ja/i.test(langs[i])) initial = "ja";
+          else if (/^ko/i.test(langs[i])) initial = "ko";
+          else if (/^en/i.test(langs[i])) initial = "en";
+        }
+      }
+      setLang(initial || "en", false);
+    })();
+  </script>
+</body>
+</html>
