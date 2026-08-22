@@ -103,6 +103,8 @@
     figure.shot img {
       width: 100%; height: auto; display: block;
     }
+    figure.phone { max-width: 320px; margin-left: auto; margin-right: auto; }
+    figure.phone img { border-radius: 14px; border: 1px solid var(--border); }
     figure.shot figcaption {
       color: var(--muted); font-size: 0.85rem; text-align: center;
       margin-top: 0.4rem;
@@ -156,8 +158,8 @@
       <p>Now the token is cut from the identifier Photos already gave that album — <code>album-4C5010FC</code>. It is stable across reports on the same device, which is what lets me follow one album through a week of them. It also solves something I did not expect: an album deleted last week is gone from the library, but the log still names it, and Foldic's own record of where that album's folder went is keyed by the same identifier. So even the deleted ones get a token instead of leaking.</p>
       <p>File names get the same treatment from the other direction. <code>IMG_8136-992A6B204A32.jpg</code> becomes <code>photo-992A6B204A32.jpg</code>: the identifier half was never personal and is already in the log, so keeping it means I can still follow one file across lines. The extension stays, because a HEIC, a MOV and a JPEG fail in different ways.</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/report.png" alt="Two numbered steps. The address is copied first because the share sheet can attach the report but cannot fill in a recipient — on any platform." width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/report.png" alt="Two numbered steps. The address is copied first because the share sheet can attach the report but cannot fill in a recipient — on any platform." width="960" height="2079" loading="lazy">
         <figcaption>Two numbered steps. The address is copied first because the share sheet can attach the report but cannot fill in a recipient — on any platform.</figcaption>
       </figure>
 
@@ -169,8 +171,8 @@
       <p>The redaction is best effort and the app says so rather than claiming to be complete. The album titles are exact, because Foldic knows them — but a title that is a single common word can still match text that was never a title, and a title shorter than two characters is deliberately not used as a pattern at all, because it would match half the log.</p>
       <p>Which is why the report is shown to you, in full, before it goes anywhere. That is the actual guarantee. A redaction whose result you can read is worth more than one that claims perfection and cannot be checked — and nothing is ever sent automatically, by any path, at any time.</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/log.png" alt="The log the way you see it, with your own album names intact. The report is the redacted version of this." width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/log.png" alt="The log the way you see it, with your own album names intact. The report is the redacted version of this." width="960" height="2079" loading="lazy">
         <figcaption>The log the way you see it, with your own album names intact. The report is the redacted version of this.</figcaption>
       </figure>
 
@@ -200,8 +202,8 @@
       <p>現在代號是從 Photos 本來就給那個相簿的識別碼裁下來的——<code>album-4C5010FC</code>。它在同一台裝置上跨報告穩定,這才讓我能在一週的報告裡追同一個相簿。它還順手解了一件我沒預期的事:上週被刪掉的相簿,圖庫裡已經不存在,但記錄檔還提到它,而 Foldic 自己記錄「那個相簿的資料夾去了哪裡」用的是同一個識別碼。所以連被刪掉的那些也拿到代號,而不是外洩。</p>
       <p>檔名從另一個方向做同樣的事。<code>IMG_8136-992A6B204A32.jpg</code> 變成 <code>photo-992A6B204A32.jpg</code>:識別碼那一半本來就不是個資、本來就在記錄檔裡,保留它我才能跨行追同一個檔案。副檔名留著,因為 HEIC、MOV 和 JPEG 的失敗方式不同。</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/report.png" alt="兩個編號的步驟。先複製地址,是因為分享面板能帶附件但不能填收件人——任何平台都不行。" width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/report.png" alt="兩個編號的步驟。先複製地址,是因為分享面板能帶附件但不能填收件人——任何平台都不行。" width="960" height="2079" loading="lazy">
         <figcaption>兩個編號的步驟。先複製地址,是因為分享面板能帶附件但不能填收件人——任何平台都不行。</figcaption>
       </figure>
 
@@ -213,8 +215,8 @@
       <p>去識別化是盡力而為,而 App 就這樣寫,不宣稱完整。相簿標題是精確的,因為 Foldic 知道它們——但一個標題如果是常見的單字,還是可能命中從來不是標題的文字;而短於兩個字元的標題刻意完全不當作替換模式,因為那會命中半個記錄檔。</p>
       <p>這正是為什麼報告會完整地先給你看。那才是真正的保證。<strong>一份你讀得到結果的去識別化,比一份宣稱完美卻無法檢查的更有價值</strong>——而且任何路徑、任何時候,都不會自動傳送任何東西。</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/log.png" alt="你自己看到的記錄,相簿名稱原封不動。報告是這份內容去識別化之後的版本。" width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/log.png" alt="你自己看到的記錄,相簿名稱原封不動。報告是這份內容去識別化之後的版本。" width="960" height="2079" loading="lazy">
         <figcaption>你自己看到的記錄,相簿名稱原封不動。報告是這份內容去識別化之後的版本。</figcaption>
       </figure>
 
@@ -244,8 +246,8 @@
       <p>いまは Photos がそのアルバムに与えている識別子から切り出しています——<code>album-4C5010FC</code>。同じ端末なら複数のレポートをまたいで安定するので、一週間分のレポートで同じアルバムを追えます。思っていなかった副産物もありました。先週削除されたアルバムはライブラリにもう存在しませんが、ログはまだその名を含んでいて、Foldic 自身の「そのアルバムのフォルダがどこへ行ったか」の記録は同じ識別子で引かれています。だから削除済みのものにも記号が付き、漏れません。</p>
       <p>ファイル名は逆方向から同じことをします。<code>IMG_8136-992A6B204A32.jpg</code> は <code>photo-992A6B204A32.jpg</code> になります。識別子の側はもともと私的ではなくログにも入っているので、残しておけば一つのファイルを行をまたいで追えます。拡張子も残します。HEIC と MOV と JPEG では壊れ方が違うからです。</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/report.png" alt="番号のついた二つの手順。先に宛先をコピーするのは、共有シートがファイルは添付できても宛先は入れられないからです。どのプラットフォームでもそうです。" width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/report.png" alt="番号のついた二つの手順。先に宛先をコピーするのは、共有シートがファイルは添付できても宛先は入れられないからです。どのプラットフォームでもそうです。" width="960" height="2079" loading="lazy">
         <figcaption>番号のついた二つの手順。先に宛先をコピーするのは、共有シートがファイルは添付できても宛先は入れられないからです。どのプラットフォームでもそうです。</figcaption>
       </figure>
 
@@ -257,8 +259,8 @@
       <p>匿名化は最善の努力であり、アプリはそう書いています。完全だとは言いません。アルバム名は正確です。Foldic が知っているからです。しかしありふれた一語のタイトルは、タイトルではなかった文字列に当たることがあり、二文字未満のタイトルは意図的にまったく使いません。ログの半分に当たってしまうからです。</p>
       <p>だからレポートは、どこかへ行く前に全文をあなたに見せます。それが本当の保証です。<strong>結果を読める匿名化のほうが、完全だと主張して確かめられないものより価値があります</strong>——そして、どの経路でも、いつでも、自動送信されるものはありません。</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/log.png" alt="あなたが見るログ。アルバム名はそのままです。レポートはこれを匿名化したものです。" width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/log.png" alt="あなたが見るログ。アルバム名はそのままです。レポートはこれを匿名化したものです。" width="960" height="2079" loading="lazy">
         <figcaption>あなたが見るログ。アルバム名はそのままです。レポートはこれを匿名化したものです。</figcaption>
       </figure>
 
@@ -288,8 +290,8 @@
       <p>이제 기호는 Photos가 그 앨범에 이미 부여한 식별자에서 잘라 냅니다 — <code>album-4C5010FC</code>. 같은 기기라면 여러 리포트에 걸쳐 안정적이어서, 일주일 분량의 리포트에서 같은 앨범을 따라갈 수 있습니다. 예상하지 못한 것도 해결됐습니다. 지난주에 삭제된 앨범은 보관함에 더 이상 없지만 로그는 여전히 그 이름을 담고 있고, '그 앨범의 폴더가 어디로 갔는지'에 대한 Foldic 자신의 기록은 같은 식별자로 찾습니다. 그래서 삭제된 것들도 유출되지 않고 기호를 받습니다.</p>
       <p>파일 이름은 반대 방향에서 같은 일을 합니다. <code>IMG_8136-992A6B204A32.jpg</code>는 <code>photo-992A6B204A32.jpg</code>가 됩니다. 식별자 쪽은 애초에 사적이지 않고 로그에도 이미 있으므로, 남겨 두면 한 파일을 여러 줄에 걸쳐 따라갈 수 있습니다. 확장자도 남깁니다. HEIC와 MOV와 JPEG는 다르게 실패하기 때문입니다.</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/report.png" alt="번호가 붙은 두 단계. 주소를 먼저 복사하는 이유는 공유 시트가 파일은 첨부할 수 있어도 받는 사람은 채울 수 없기 때문입니다. 어느 플랫폼에서나 그렇습니다." width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/report.png" alt="번호가 붙은 두 단계. 주소를 먼저 복사하는 이유는 공유 시트가 파일은 첨부할 수 있어도 받는 사람은 채울 수 없기 때문입니다. 어느 플랫폼에서나 그렇습니다." width="960" height="2079" loading="lazy">
         <figcaption>번호가 붙은 두 단계. 주소를 먼저 복사하는 이유는 공유 시트가 파일은 첨부할 수 있어도 받는 사람은 채울 수 없기 때문입니다. 어느 플랫폼에서나 그렇습니다.</figcaption>
       </figure>
 
@@ -301,8 +303,8 @@
       <p>익명화는 최선의 노력이며, 앱은 완전하다고 주장하지 않고 그렇게 적어 둡니다. 앨범 제목은 정확합니다. Foldic이 알고 있기 때문입니다. 그러나 흔한 한 단어인 제목은 제목이 아니었던 문자열에 걸릴 수 있고, 두 글자보다 짧은 제목은 의도적으로 아예 사용하지 않습니다. 로그의 절반에 걸리기 때문입니다.</p>
       <p>그래서 리포트는 어디로 가기 전에 전문을 당신에게 보여 줍니다. 그것이 진짜 보증입니다. <strong>결과를 읽을 수 있는 익명화가, 완전하다고 주장하면서 확인할 수 없는 것보다 가치 있습니다</strong> — 그리고 어떤 경로로도, 어떤 순간에도 자동으로 전송되는 것은 없습니다.</p>
 
-      <figure class="shot">
-        <img src="/notes/nothing-about-you/log.png" alt="당신이 보는 로그. 앨범 이름은 그대로입니다. 리포트는 이것을 익명화한 버전입니다." width="332" height="720" loading="lazy">
+      <figure class="shot phone">
+        <img src="/notes/nothing-about-you/log.png" alt="당신이 보는 로그. 앨범 이름은 그대로입니다. 리포트는 이것을 익명화한 버전입니다." width="960" height="2079" loading="lazy">
         <figcaption>당신이 보는 로그. 앨범 이름은 그대로입니다. 리포트는 이것을 익명화한 버전입니다.</figcaption>
       </figure>
 
