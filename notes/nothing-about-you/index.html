@@ -143,20 +143,19 @@
     <h1>A bug report that tells me nothing about you</h1>
     <p class="byline">August 22, 2026 · Foldic development notes</p>
 
-    <p class="lede">Apple's privacy model is strict in a way I am glad about: I cannot reach into your device and look at what happened. Which means when Foldic gets something wrong, the only way I learn about it is if you tell me. That turns a comfortable question into an uncomfortable one — not "how do I collect diagnostics", but "what is a diagnostic report allowed to know about you?"</p>
+    <p class="lede">Apple's privacy model is strict in a way I am glad about: I cannot reach into your device and look at what happened. So when Foldic gets something wrong, the only way I learn of it is if you tell me — and the real question stops being "how do I collect diagnostics" and becomes "what is a diagnostic report allowed to know about you?"</p>
 
       <h2>A log is more personal than it looks</h2>
-      <p>Foldic keeps a plain-text log of what it did: which album it compared, which file it wrote, how long each took, what the filesystem said when something failed. Read one line and it looks harmless. Read the whole file and it is a description of somebody's life. Album titles are the names of their children, their trips, their dead relatives. File names carry the same. The destination path contains the name they gave their drive, which is often their own name, and the account they log in as.</p>
-      <p>And yet the parts I actually need are none of those. I need sizes, durations, error codes, memory figures, and the order things happened in. The useful half and the private half sit on the same line.</p>
+      <p>Foldic keeps a plain-text log of what it did: which album it compared, which file it wrote, how long each took, what the filesystem said when something failed. One line is harmless. The whole file is a description of somebody's life — album titles are the names of children, trips, dead relatives, and the file names carry the same. Yet what I actually need is none of that: sizes, durations, error codes, and the order things happened in. The useful half and the private half sit on the same line.</p>
 
       <h2>Pseudonyms, not deletion</h2>
-      <p>The obvious move is to strip the names out. I did not, because it would have cost me a bug I have already had to fix. An album once aborted an entire scan on someone's Mac, and the album's <em>title was the bug</em>: 502 bytes long, padded with an invisible character to get past a spam filter, longer than the filesystem would accept as a folder name. If the report had removed that title, the report would have been useless.</p>
-      <p>So every name is replaced by a short token, and a legend at the top of the report records the shape of what it stood for — how many bytes, whether it was plain ASCII — without the content. I get to see that something was 502 bytes and not plain text. I do not get to see what it said.</p>
+      <p>The obvious move is to strip the names out. I did not, because it would have cost me a bug I have already had to fix: an album title once aborted an entire scan on a customer's Mac, and the title <em>was</em> the bug — 502 bytes, padded with an invisible character to get past a spam filter, longer than the filesystem accepts as a folder name. Delete titles from reports, and that bug becomes unsolvable.</p>
+      <p>So every name becomes a short token, and a legend at the top of the report records only the shape of what it replaced — how many bytes, whether it was plain ASCII. I get to see that something was 502 bytes and not plain text. I never see what it said.</p>
 
       <h2>The token comes from the album's own identifier</h2>
-      <p>My first attempt numbered them: <code>album#1</code>, <code>album#2</code>, in the order they appeared. That works for one report and falls apart across two, because the same album is #3 in the morning and #7 in the afternoon and I cannot line them up.</p>
-      <p>Now the token is cut from the identifier Photos already gave that album — <code>album-4C5010FC</code>. It is stable across reports on the same device, which is what lets me follow one album through a week of them. It also solves something I did not expect: an album deleted last week is gone from the library, but the log still names it, and Foldic's own record of where that album's folder went is keyed by the same identifier. So even the deleted ones get a token instead of leaking.</p>
-      <p>File names get the same treatment from the other direction. <code>IMG_8136-992A6B204A32.jpg</code> becomes <code>photo-992A6B204A32.jpg</code>: the identifier half was never personal and is already in the log, so keeping it means I can still follow one file across lines. The extension stays, because a HEIC, a MOV and a JPEG fail in different ways.</p>
+      <p>My first attempt numbered them <code>album#1</code>, <code>album#2</code> in order of appearance. That works for one report and breaks across two from the same person: the album that is #3 in the morning is #7 in the afternoon, and I cannot line them up.</p>
+      <p>Now the token is cut from the identifier Photos already gave the album — <code>album-4C5010FC</code> — stable across reports from the same device. It also covers albums deleted since: the log still mentions them, and Foldic's own record of where a deleted album's folder went is keyed by that same identifier, so even those get a token instead of leaking.</p>
+      <p>File names keep the identifier and lose the human part: <code>IMG_8136-992A6B204A32.jpg</code> becomes <code>photo-992A6B204A32.jpg</code>. The extension stays, because a HEIC, a MOV and a JPEG fail in different ways.</p>
 
       <figure class="shot phone">
         <img src="/notes/nothing-about-you/report.png" alt="Two numbered steps. The address is copied first because the share sheet can attach the report but cannot fill in a recipient — on any platform." width="960" height="2079" loading="lazy">
@@ -164,12 +163,12 @@
       </figure>
 
       <h2>Two steps, because the order is not guessable</h2>
-      <p>Getting the report to me turned out to be the fiddly part, for a reason that is invisible until you hit it: <strong>the share sheet can attach a file but cannot fill in a recipient.</strong> Not on iOS, not on macOS, not with any API. The routes that <em>can</em> fill in an address — <code>mailto:</code>, Gmail's web compose — cannot carry an attachment.</p>
-      <p>My first version was a row of four buttons, and it was unusable: nothing told you which to press or in what order. It is two numbered steps now. Step one copies the address. Step two shares the report and says, in the step's own text, to paste the address into the To field. That sentence is the whole trick, and without it people share the report and then sit in front of an empty recipient line.</p>
+      <p>Getting the report to me turned out to be the fiddly part, for a reason that is invisible until you hit it: <strong>the share sheet can attach a file but cannot fill in a recipient.</strong> Not on iOS, not on macOS, not with any API. And the routes that <em>can</em> fill in an address — <code>mailto:</code>, Gmail's web compose — cannot carry an attachment.</p>
+      <p>My first version was a row of four buttons, and it was unusable: nothing said which to press or in what order. Now it is two numbered steps. Step one copies the address. Step two shares the report, and says in its own text to paste the address into the To field. That sentence is the whole trick — without it, people share the report and then sit in front of an empty recipient line.</p>
 
       <h2>What it does not promise</h2>
-      <p>The redaction is best effort and the app says so rather than claiming to be complete. The album titles are exact, because Foldic knows them — but a title that is a single common word can still match text that was never a title, and a title shorter than two characters is deliberately not used as a pattern at all, because it would match half the log.</p>
-      <p>Which is why the report is shown to you, in full, before it goes anywhere. That is the actual guarantee. A redaction whose result you can read is worth more than one that claims perfection and cannot be checked — and nothing is ever sent automatically, by any path, at any time.</p>
+      <p>The redaction is best effort, and the app says so rather than claiming to be complete. Titles are exact, because Foldic knows them — but a title that is a single common word can still match text that was never a title, and a title under two characters is refused as a pattern outright, because it would match half the log.</p>
+      <p>Which is why the report is shown to you, in full, before it goes anywhere. That is the actual guarantee: a redaction whose result you can read is worth more than one that claims perfection and cannot be checked. And nothing is ever sent automatically, by any path, at any time.</p>
 
       <figure class="shot phone">
         <img src="/notes/nothing-about-you/log.png" alt="The log the way you see it, with your own album names intact. The report is the redacted version of this." width="960" height="2079" loading="lazy">
@@ -177,7 +176,7 @@
       </figure>
 
       <h2>Privacy first, then experience</h2>
-      <p>This is the first reporting interface I have designed, and it took longer than the feature it serves. The balance it is trying to strike — enough for me to fix the bug, nothing that describes you — is the balance I want every part of this app to be judged on. Protecting the person comes first; making the app pleasant comes second. In this case the two turned out not to conflict at all: the report that tells me least about you is also the one that gets your problem fixed fastest, because it puts the sizes and the timings and the error codes where I can read them in one pass.</p>
+      <p>The balance this screen tries to strike — enough for me to fix the bug, nothing that describes you — is the balance I want the whole app judged on. And the two turned out not to conflict: the report that tells me least about you is also the one that gets your problem fixed fastest, because the sizes, the timings and the error codes are all still there, readable in one pass.</p>
       <div class="callout"><strong>When can you use this?</strong> Report to Developer ships with version 0.8.4, on Mac and iPhone, reached from the log button at the top left. The same design is going into my other apps.</div>
   </main>
 
@@ -187,20 +186,19 @@
     <h1>請告訴我出了什麼事，但別告訴我你是誰</h1>
     <p class="byline">2026 年 8 月 22 日 · Foldic 開發筆記</p>
 
-    <p class="lede">Apple 的隱私模型嚴格得讓我心安:我沒有辦法伸手進你的裝置去看發生了什麼。也就是說,Foldic 出錯的時候,我唯一能知道的途徑是你告訴我。這把一個舒服的問題換成了一個不舒服的問題——不是「我怎麼蒐集診斷資訊」,而是「一份診斷報告可以知道關於你的什麼?」</p>
+    <p class="lede">Apple 的隱私模型嚴格得讓我安心:我沒辦法伸手進你的裝置,看看發生了什麼。所以 Foldic 出錯的時候,我唯一的消息來源就是你。於是問題不再是「我要怎麼蒐集診斷資訊」,而是「一份診斷報告,可以知道你多少事?」</p>
 
-      <h2>記錄檔比看起來私密得多</h2>
-      <p>Foldic 會留一份純文字記錄:比對了哪個相簿、寫入了哪個檔案、各花多久、失敗時檔案系統說了什麼。單看一行,無害。看完整份,那是一個人生活的描述。相簿名稱是他們孩子的名字、旅程的名字、已故親人的名字。檔名也一樣。目的地路徑裡有他們給硬碟取的名字——常常就是自己的名字——以及登入用的帳號。</p>
-      <p>而我真正需要的完全不是那些。我需要檔案大小、耗時、錯誤碼、記憶體數字,以及事情發生的順序。有用的那一半和私密的那一半,寫在同一行上。</p>
+      <h2>記錄檔比想像中私密</h2>
+      <p>Foldic 留著一份純文字記錄:比對了哪個相簿、寫了哪個檔案、各花多久、失敗時檔案系統說了什麼。單看一行沒什麼,整份讀完就是一個人生活的描述 —— 相簿名稱是孩子的名字、旅行的名字、已故親人的名字,檔名也一樣。而我真正需要的偏偏不是這些:大小、耗時、錯誤碼,還有事情發生的順序。有用的一半和私密的一半,寫在同一行上。</p>
 
-      <h2>代號,而不是刪除</h2>
-      <p>直覺做法是把名稱拿掉。我沒有,因為那會讓我失去一個已經修過的 bug。曾經有一個相簿讓某位使用者的整次掃描中止,而那個相簿的<em>標題本身就是 bug</em>:502 bytes 長,用一個看不見的字元填充來繞過垃圾訊息過濾,長度超過檔案系統能接受的資料夾名稱。如果報告把那個標題移除了,報告就沒有用了。</p>
-      <p>所以每個名稱都換成一個簡短代號,而報告開頭的圖例會記下它的「形狀」——幾個 byte、是不是純 ASCII——但不記內容。我看得到某個東西是 502 bytes 而且不是純文字。我看不到它寫了什麼。</p>
+      <h2>用代號,而不是刪掉</h2>
+      <p>直覺做法是把名稱通通拿掉。我沒有,因為那會讓我丟掉一個已經修過的 bug:曾經有個相簿讓一位用戶的整次掃描中止,而那個相簿的標題<em>本身就是 bug</em> —— 502 bytes,用一個看不見的字元填充來躲過垃圾訊息過濾,長到檔案系統不肯收它當資料夾名稱。報告要是把標題刪了,這個 bug 就無解了。</p>
+      <p>所以每個名稱都換成一個短代號,報告開頭的圖例只記下它的「形狀」—— 幾個 byte、是不是純 ASCII —— 不記內容。我看得到某個東西 502 bytes、不是純文字;我永遠看不到它寫了什麼。</p>
 
       <h2>代號來自相簿自己的識別碼</h2>
-      <p>我第一版是編號:<code>album#1</code>、<code>album#2</code>,按出現順序。這在單一報告裡可行,跨兩份就散了,因為同一個相簿早上是 #3、下午是 #7,我對不起來。</p>
-      <p>現在代號是從 Photos 本來就給那個相簿的識別碼裁下來的——<code>album-4C5010FC</code>。它在同一台裝置上跨報告穩定,這才讓我能在一週的報告裡追同一個相簿。它還順手解了一件我沒預期的事:上週被刪掉的相簿,圖庫裡已經不存在,但記錄檔還提到它,而 Foldic 自己記錄「那個相簿的資料夾去了哪裡」用的是同一個識別碼。所以連被刪掉的那些也拿到代號,而不是外洩。</p>
-      <p>檔名從另一個方向做同樣的事。<code>IMG_8136-992A6B204A32.jpg</code> 變成 <code>photo-992A6B204A32.jpg</code>:識別碼那一半本來就不是個資、本來就在記錄檔裡,保留它我才能跨行追同一個檔案。副檔名留著,因為 HEIC、MOV 和 JPEG 的失敗方式不同。</p>
+      <p>第一版是照出現順序編號:<code>album#1</code>、<code>album#2</code>。單份報告沒問題,同一個人寄來兩份就散了 —— 早上是 #3 的相簿,下午變成 #7,我對不起來。</p>
+      <p>現在代號直接從 Photos 本來就給那個相簿的識別碼裁下來 —— <code>album-4C5010FC</code> —— 同一台裝置上,跨報告不變。連已經刪掉的相簿也照顧到了:圖庫裡沒有了,記錄檔還提到它,而 Foldic 記「那個相簿的資料夾去了哪裡」用的正是同一個識別碼,所以它們也拿到代號,而不是外洩。</p>
+      <p>檔名則是留下識別碼、去掉屬於人的那一半:<code>IMG_8136-992A6B204A32.jpg</code> 變成 <code>photo-992A6B204A32.jpg</code>。副檔名保留,因為 HEIC、MOV、JPEG 壞起來的樣子各不相同。</p>
 
       <figure class="shot phone">
         <img src="/notes/nothing-about-you/report.png" alt="兩個編號的步驟。先複製地址,是因為分享面板能帶附件但不能填收件人——任何平台都不行。" width="960" height="2079" loading="lazy">
@@ -208,12 +206,12 @@
       </figure>
 
       <h2>兩個步驟,因為順序猜不出來</h2>
-      <p>把報告送到我手上,反而是最麻煩的部分,原因在你撞到之前完全看不見:<strong>分享面板能帶附件,但不能填收件人。</strong>iOS 不行,macOS 不行,任何 API 都不行。而<em>能</em>填地址的那些路徑——<code>mailto:</code>、Gmail 的網頁撰寫——不能帶附件。</p>
-      <p>我的第一版是一排四個按鈕,結果完全不能用:沒有任何東西告訴你該按哪個、按什麼順序。現在是兩個編號的步驟。步驟一複製地址。步驟二分享報告,並且在步驟的文字裡直接說:把地址貼到收件人欄位。那一句話就是整個關鍵,少了它,人們會把報告分享出去,然後對著空白的收件人欄位發呆。</p>
+      <p>把報告送到我手上,反而是最麻煩的部分,原因在撞上之前完全看不見:<strong>分享面板能附上檔案,卻不能填收件人。</strong>iOS 不行、macOS 不行、任何 API 都不行。而<em>能</em>填地址的那些路 —— <code>mailto:</code>、Gmail 的網頁撰寫 —— 又帶不了附件。</p>
+      <p>我的第一版是一排四顆按鈕,完全不能用:沒有任何東西告訴你該按哪顆、什麼順序。現在是兩個編號的步驟:步驟一複製地址;步驟二分享報告,而且步驟自己的文字直接說 —— 把地址貼到收件人欄位。整個關鍵就這一句,少了它,大家把報告分享出去,然後對著空白的收件人欄發呆。</p>
 
       <h2>它不承諾的事</h2>
-      <p>去識別化是盡力而為,而 App 就這樣寫,不宣稱完整。相簿標題是精確的,因為 Foldic 知道它們——但一個標題如果是常見的單字,還是可能命中從來不是標題的文字;而短於兩個字元的標題刻意完全不當作替換模式,因為那會命中半個記錄檔。</p>
-      <p>這正是為什麼報告會完整地先給你看。那才是真正的保證。<strong>一份你讀得到結果的去識別化,比一份宣稱完美卻無法檢查的更有價值</strong>——而且任何路徑、任何時候,都不會自動傳送任何東西。</p>
+      <p>去識別化是盡力而為,App 也照實這樣寫,不宣稱完整。標題是精確的,因為 Foldic 知道它們 —— 但一個常見單字的標題,還是可能誤中從來不是標題的文字;短於兩個字元的標題則乾脆不當作替換模式,否則會命中半份記錄檔。</p>
+      <p>所以報告在送出去之前,會完整地先給你看。那才是真正的保證:一份你讀得到結果的去識別化,勝過一份宣稱完美卻無從檢查的。而且不管走哪條路、在什麼時候,都不會自動送出任何東西。</p>
 
       <figure class="shot phone">
         <img src="/notes/nothing-about-you/log.png" alt="你自己看到的記錄,相簿名稱原封不動。報告是這份內容去識別化之後的版本。" width="960" height="2079" loading="lazy">
@@ -221,7 +219,7 @@
       </figure>
 
       <h2>先隱私,再體驗</h2>
-      <p>這是我第一次設計回報介面,花的時間比它服務的那個功能還長。它想取的平衡——足夠讓我修好 bug,但不描述你——就是我希望這個 App 每個部分都被拿來檢驗的平衡。保護使用者優先,提升體驗其次。而這次結果是兩者根本不衝突:那份最少告訴我關於你的報告,同時也是最快讓你的問題被修好的那一份,因為它把大小、時間和錯誤碼放在我一眼就讀得到的地方。</p>
+      <p>這個畫面想取的平衡 —— 夠我修好 bug,但不描述你 —— 是我希望整個 App 都被拿來檢驗的平衡。而這次結果是,兩者根本不衝突:最少透露你的那份報告,同時也是最快修好你的問題的那份,因為大小、耗時和錯誤碼都還在,我一遍就讀得完。</p>
       <div class="callout"><strong>這什麼時候能用?</strong>「回報給開發者」隨 0.8.4 版上線,Mac 與 iPhone 都有,從左上角的記錄按鈕進入。同樣的設計也會進到我其他的 App。</div>
   </main>
 
