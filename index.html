@@ -475,6 +475,13 @@
       <summary>Does the backup include my edits?</summary>
       <p>No — Foldic backs up the original file as your camera captured it, not the rendered result of a crop, filter or adjustment. Edits live in the Photos app's own database, and the backup deliberately holds the untouched original: it is the highest-fidelity copy, it never re-encodes, and it keeps one file per photo. If you would rather also keep the edited version, turn on <em>Back up edited versions too</em> in settings — each edited photo then gets a second file alongside its original, at the cost of more space and time.</p>
     </details>
+    <details id="faq-edited-3302">
+      <summary>The log shows the original (-r1) backed up but the edited version (-r2) failed with "PHPhotosErrorDomain 3302". What's wrong?</summary>
+      <p><strong>Nothing was lost.</strong> Every file ending in <code>-r1</code> is the original photo, and those all backed up. Only the <code>-r2</code> files failed — those are the <em>edited</em> versions (the rendered result of your crops, filters and adjustments), and only when you have turned on <em>Back up edited versions too</em>.</p>
+      <p><strong>Why only the edited version?</strong> With iCloud's <em>Optimize Mac Storage</em> on, Photos keeps only what it needs locally and leaves the rest in the cloud. The edited version is not a stored file — Photos re-renders it on demand from the original's full-resolution pixels plus your adjustment data. When those full-size pixels have been offloaded to iCloud, Photos can neither hand over a finished edit nor rebuild one, so it returns error 3302 instantly (that's why it fails in milliseconds instead of downloading). The original still backs up fine because it is either on disk or cheap to fetch.</p>
+      <p><strong>How to fix it:</strong> open the Photos app → Settings → iCloud → choose <em>Download Originals to this Mac</em>, let it finish, then run the backup again — Photos now has what it needs to rebuild the edited versions. Or, if you only want originals, turn off <em>Back up edited versions too</em> and the errors disappear with nothing lost.</p>
+      <p>If a few edited versions still fail after downloading originals, those edits were usually made by another app or a much older system version that this Mac cannot re-render. Back up the original (with edited versions off), or export from the device where the edit was made.</p>
+    </details>
     <details id="faq-live-photos">
       <summary>What about Live Photos?</summary>
       <p>Both parts are exported: the still image and the paired video file.</p>
