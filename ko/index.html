@@ -423,6 +423,19 @@
       <summary>iPhone 버전에는 무엇이 필요한가요?</summary>
       <p>USB-C 포트가 있는 iPhone과 읽을 수 있는 드라이브(exFAT, FAT32, APFS)가 필요합니다. 버스 전원 NVMe SSD가 가장 잘 맞습니다. 속도의 한계가 디스크가 아니라 사진 쪽에 있을 정도로 빠릅니다. 회전식 드라이브는 별도 전원이 필요할 수 있습니다. 파일 앱이 접근할 수 있는 위치로도 복사할 수 있지만, 외장 드라이브가 이 버전의 핵심입니다.</p>
     </details>
+    <details id="faq-old-iphone">
+      <summary>제 iPhone은 구형이라 USB-C 포트가 없습니다(어댑터/허브도 없음). Foldic으로 어떻게 백업하나요? 케이블로 Mac에 연결하면 도움이 되나요?</summary>
+      <p>케이블 연결은 <strong>도움이 되지 않습니다</strong>. 케이블로 사진을 Mac에 가져와도(사진 가져오기, 이미지 캡처, 외장 SSD로 복사) 앨범 구조는 보존되지 않습니다 — Apple이 모두 하나의 더미로 평탄화합니다. 그리고 Mac의 Foldic은 Mac 자체의 사진 보관함만 볼 수 있고, SSD에 넣은 보관함이나 낱개 파일은 보지 못합니다. 그래서 이 방법은 원하지 않는 결과를 줍니다.</p>
+      <p>구형 iPhone은 대신 iCloud 경로를 쓰세요. iPhone과 Mac을 연결할 필요가 없습니다:</p>
+      <ol>
+        <li>iCloud 저장 공간을 한 달 구매하여 iCloud 요금제가 휴대폰의 사진보다 크도록 합니다.</li>
+        <li>휴대폰의 사진이 iCloud에 완전히 동기화되도록 둡니다.</li>
+        <li>Mac에 Foldic을 설치하고 Mac에서 동기화합니다. 휴대폰과 Mac을 연결할 필요가 없습니다 — 케이블 가져오기는 도움이 되지 않는데, Apple이 앨범 구조를 유지해 주지 않기 때문입니다.</li>
+        <li>Mac용 Foldic이 iCloud에서 동기화를 마칠 때까지 기다립니다. 앨범이 구조를 유지한 채 내려오고, Foldic이 이를 일반 폴더로 드라이브에 미러링합니다.</li>
+        <li>그 후 iCloud 요금제는 해지하거나 유지하거나 둘 다 괜찮습니다.</li>
+      </ol>
+      <p>Foldic의 USB-C iPhone 버전은 최신 휴대폰이 iCloud를 거치지 않고 드라이브로 바로 복사할 수 있도록 만들어졌습니다. USB-C 포트가 없다면 위의 iCloud → Mac 경로가 깔끔한 방법이며, 앨범 구조를 지키는 유일한 방법입니다.</p>
+    </details>
     <details id="faq-iphone-offline">
       <summary>iPhone 버전에 인터넷이나 iCloud가 필요한가요?</summary>
       <p>둘 다 필요하지 않으며, 그것이 iPhone 버전의 핵심입니다. iCloud 구독도, 계정도, 연결도 필요 없습니다. 사진은 기기에서 연결된 드라이브로 바로 기록되며 Foldic이든 Apple이든 어떤 서비스로도 업로드되지 않습니다. 비행기 안에서도 할 수 있습니다. 의도적으로 iCloud를 쓰지 않는 분에게도, 사진 앱의 모든 앨범을 내 디스크로 꺼내는 방법입니다.</p>

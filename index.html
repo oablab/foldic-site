@@ -436,6 +436,19 @@
       <summary>What does the iPhone version need?</summary>
       <p>An iPhone with a USB-C port and a drive it can read — exFAT, FAT32 and APFS all work. A bus-powered NVMe SSD is the natural pairing: fast enough that the copy is limited by your photos, not the disk. A spinning drive may need its own power supply. You can also copy to anywhere the Files app can reach, but an attached drive is the point of it.</p>
     </details>
+    <details id="faq-old-iphone">
+      <summary>My iPhone is older and has no USB-C port (or no adapter/hub). How do I back up with Foldic — and does connecting it to my Mac by cable help?</summary>
+      <p>A cable connection does <strong>not</strong> help. Importing photos from the phone into the Mac over a cable (Photos import, Image Capture, or copying to an external SSD) does not preserve your album structure — Apple flattens everything into one pile, and Foldic on the Mac only ever sees the Mac's own Photos library, not a library or loose files you put on an SSD. So that route gives you exactly what you don't want.</p>
+      <p>For an older iPhone, go through iCloud instead — the phone and the Mac never need to touch:</p>
+      <ol>
+        <li>Buy one month of iCloud storage, enough that your iCloud plan is larger than the photos on your phone.</li>
+        <li>Let the phone's Photos finish syncing to iCloud completely.</li>
+        <li>Install Foldic on your Mac and back up from the Mac. The phone and Mac do not need to be connected — a cable import wouldn't help anyway, because Apple won't keep your album structure that way.</li>
+        <li>Wait for Foldic on the Mac to finish syncing from iCloud. Your albums come down with their structure intact, and Foldic mirrors them to your drive as ordinary folders.</li>
+        <li>Afterwards you can cancel the iCloud plan or keep it — either is fine.</li>
+      </ol>
+      <p>The USB-C iPhone version of Foldic exists precisely so newer phones can skip iCloud and copy straight to a drive; without a USB-C port, the iCloud → Mac route above is the clean way, and it is the one that keeps your albums.</p>
+    </details>
     <details id="faq-iphone-offline">
       <summary>Does the iPhone version need internet or iCloud?</summary>
       <p>Neither, and this is the point of the iPhone version. No iCloud subscription, no account, no connection: photos move from your device straight to the attached drive, and nothing is uploaded to any service, Foldic's or Apple's. You can do it on a plane. If you have deliberately stayed off iCloud, this is the way to get every album out of Photos and onto a disk you own.</p>

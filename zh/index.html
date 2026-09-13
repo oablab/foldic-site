@@ -381,6 +381,19 @@
       <summary>iPhone 版需要什麼條件？</summary>
       <p>一支有 USB-C 埠的 iPhone，以及它讀得到的硬碟 —— exFAT、FAT32、APFS 都可以。匯流排供電的 NVMe SSD 是最自然的搭配：快到瓶頸會落在照片本身而不是硬碟。傳統機械硬碟可能需要獨立供電。你也可以複製到「檔案」App 能存取的任何位置，但外接硬碟才是這個版本的重點。</p>
     </details>
+    <details id="faq-old-iphone">
+      <summary>我的 iPhone 比較舊、沒有 USB-C 埠（或沒有轉接／hub），要怎麼用 Foldic 備份？把手機用線接上 Mac 有幫助嗎？</summary>
+      <p>用線對接<strong>沒有幫助</strong>。把手機的照片透過線材匯入 Mac（照片匯入、影像擷取，或複製到外接 SSD）並不會保留你的相簿結構——Apple 會把所有照片攤平成一堆；而 Mac 上的 Foldic 只看得到 Mac 自己的照片圖庫，看不到你放在 SSD 上的圖庫或散檔。所以這條路給你的，正好是你不想要的結果。</p>
+      <p>舊款 iPhone 請改走 iCloud——手機和 Mac 完全不需要對接：</p>
+      <ol>
+        <li>買一個月的 iCloud 空間，確保 iCloud 方案比手機裡的照片還大。</li>
+        <li>讓手機的照片完整同步到 iCloud 完成。</li>
+        <li>在 Mac 安裝 Foldic，從 Mac 這端同步。手機和 Mac 不需要連線——對接匯入完全沒幫助，因為 Apple 不會幫你保留相簿結構。</li>
+        <li>等 Foldic Mac 版從 iCloud 同步完即可。相簿會帶著結構一起下來，Foldic 再把它們鏡像成硬碟上的一般資料夾。</li>
+        <li>之後 iCloud 方案可以退訂，也可以保留，都行。</li>
+      </ol>
+      <p>Foldic 的 USB-C iPhone 版，正是為了讓較新的手機可以跳過 iCloud、直接複製到硬碟而存在；沒有 USB-C 埠時，上面這條 iCloud → Mac 的路才是乾淨的做法，也是唯一會保留你相簿結構的做法。</p>
+    </details>
     <details id="faq-iphone-offline">
       <summary>iPhone 版需要網路或 iCloud 嗎？</summary>
       <p>兩者都不需要，而這正是 iPhone 版的重點。不需要 iCloud 訂閱、不需要帳號、不需要連線：照片從裝置直接寫入外接硬碟，不會上傳到任何服務 —— 不論是 Foldic 或 Apple 的。在飛機上也能做。如果你本來就刻意不用 iCloud，這就是把「照片」App 裡所有相簿完整搬到自己硬碟上的方法。</p>
