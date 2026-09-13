@@ -386,6 +386,10 @@
       <summary>iPhone 版需要什麼條件？</summary>
       <p>一支有 USB-C 埠的 iPhone，以及它讀得到的硬碟 —— exFAT、FAT32、APFS 都可以。匯流排供電的 NVMe SSD 是最自然的搭配：快到瓶頸會落在照片本身而不是硬碟。傳統機械硬碟可能需要獨立供電。你也可以複製到「檔案」App 能存取的任何位置，但外接硬碟才是這個版本的重點。</p>
     </details>
+    <details id="faq-any-usb-drive">
+      <summary>我用任何 USB 外接裝置接 iPhone／iPad，都可以拿來當 Foldic 的備份空間嗎？</summary>
+      <p>可以，前提是它的檔案系統要是 iPhone 讀得懂的格式——建議格式化成 exFAT。市面上販售的外接 USB 裝置大多出廠是 Windows 用的 NTFS，iOS 完全不認得：接上去什麼都不會出現，Foldic 自然也沒地方寫。先在電腦上格式化成 exFAT 一次（Mac 用「磁碟工具程式」，選 exFAT），再接上 iPhone，它就會出現在「檔案」和 Foldic 裡。FAT32 與 APFS 也能用；exFAT 只是之後任何電腦都能直接讀的那一個。</p>
+    </details>
     <details id="faq-old-iphone">
       <summary>我的 iPhone 比較舊、沒有 USB-C 埠（或沒有轉接／hub），要怎麼用 Foldic 備份？把手機用線接上 Mac 有幫助嗎？</summary>
       <p>用線對接<strong>沒有幫助</strong>。把手機的照片透過線材匯入 Mac（照片匯入、影像擷取，或複製到外接 SSD）並不會保留你的相簿結構——Apple 會把所有照片攤平成一堆；而 Mac 上的 Foldic 只看得到 Mac 自己的照片圖庫，看不到你放在 SSD 上的圖庫或散檔。所以這條路給你的，正好是你不想要的結果。</p>

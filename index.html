@@ -441,6 +441,10 @@
       <summary>What does the iPhone version need?</summary>
       <p>An iPhone with a USB-C port and a drive it can read — exFAT, FAT32 and APFS all work. A bus-powered NVMe SSD is the natural pairing: fast enough that the copy is limited by your photos, not the disk. A spinning drive may need its own power supply. You can also copy to anywhere the Files app can reach, but an attached drive is the point of it.</p>
     </details>
+    <details id="faq-any-usb-drive">
+      <summary>Can I use any USB drive I plug into my iPhone or iPad as Foldic's backup space?</summary>
+      <p>Yes — as long as the drive is in a format the iPhone can read. exFAT is the safe choice, and it is what we recommend. Most external drives sold today come formatted for Windows (NTFS), which iOS does not recognize at all: plug one in and nothing appears, so Foldic has nowhere to write. Format it as exFAT once on a Mac or PC (Disk Utility on the Mac, choosing exFAT), plug it into the iPhone, and it shows up in Files and in Foldic. FAT32 and APFS work too; exFAT is simply the one every computer can also read afterwards.</p>
+    </details>
     <details id="faq-old-iphone">
       <summary>My iPhone is older and has no USB-C port (or no adapter/hub). How do I back up with Foldic — and does connecting it to my Mac by cable help?</summary>
       <p>A cable connection does <strong>not</strong> help. Importing photos from the phone into the Mac over a cable (Photos import, Image Capture, or copying to an external SSD) does not preserve your album structure — Apple flattens everything into one pile, and Foldic on the Mac only ever sees the Mac's own Photos library, not a library or loose files you put on an SSD. So that route gives you exactly what you don't want.</p>

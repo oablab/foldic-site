@@ -428,6 +428,10 @@
       <summary>iPhone 버전에는 무엇이 필요한가요?</summary>
       <p>USB-C 포트가 있는 iPhone과 읽을 수 있는 드라이브(exFAT, FAT32, APFS)가 필요합니다. 버스 전원 NVMe SSD가 가장 잘 맞습니다. 속도의 한계가 디스크가 아니라 사진 쪽에 있을 정도로 빠릅니다. 회전식 드라이브는 별도 전원이 필요할 수 있습니다. 파일 앱이 접근할 수 있는 위치로도 복사할 수 있지만, 외장 드라이브가 이 버전의 핵심입니다.</p>
     </details>
+    <details id="faq-any-usb-drive">
+      <summary>iPhone이나 iPad에 연결하는 USB 외장 장치라면 무엇이든 Foldic 백업 공간으로 쓸 수 있나요?</summary>
+      <p>네, 다만 iPhone이 읽을 수 있는 파일 시스템이어야 합니다. exFAT를 권합니다. 시중에 판매되는 외장 USB 장치는 대부분 Windows용 NTFS로 출고되며, iOS는 이를 전혀 인식하지 못합니다. 연결해도 아무것도 나타나지 않아 Foldic이 기록할 곳이 없습니다. 먼저 컴퓨터에서 한 번 exFAT로 포맷한 뒤(Mac에서는 '디스크 유틸리티'에서 exFAT 선택) iPhone에 연결하면 '파일' 앱과 Foldic에 나타납니다. FAT32와 APFS도 동작하지만, 이후 어떤 컴퓨터에서도 바로 읽을 수 있는 exFAT가 가장 무난합니다.</p>
+    </details>
     <details id="faq-old-iphone">
       <summary>제 iPhone은 구형이라 USB-C 포트가 없습니다(어댑터/허브도 없음). Foldic으로 어떻게 백업하나요? 케이블로 Mac에 연결하면 도움이 되나요?</summary>
       <p>케이블 연결은 <strong>도움이 되지 않습니다</strong>. 케이블로 사진을 Mac에 가져와도(사진 가져오기, 이미지 캡처, 외장 SSD로 복사) 앨범 구조는 보존되지 않습니다 — Apple이 모두 하나의 더미로 평탄화합니다. 그리고 Mac의 Foldic은 Mac 자체의 사진 보관함만 볼 수 있고, SSD에 넣은 보관함이나 낱개 파일은 보지 못합니다. 그래서 이 방법은 원하지 않는 결과를 줍니다.</p>
