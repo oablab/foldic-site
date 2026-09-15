@@ -445,6 +445,11 @@
       <summary>Can I use any USB drive I plug into my iPhone or iPad as Foldic's backup space?</summary>
       <p>Yes — as long as the drive is in a format the iPhone can read. exFAT is the safe choice, and it is what we recommend. Most external drives sold today come formatted for Windows (NTFS), which iOS does not recognize at all: plug one in and nothing appears, so Foldic has nowhere to write. Format it as exFAT once on a Mac or PC (Disk Utility on the Mac, choosing exFAT), plug it into the iPhone, and it shows up in Files and in Foldic. FAT32 and APFS work too; exFAT is simply the one every computer can also read afterwards.</p>
     </details>
+    <details id="faq-lightning">
+      <summary>My iPhone has a Lightning port. Can Foldic back up to a drive on it?</summary>
+      <p>No — and we cannot support it. On Lightning iPhones (iPhone 14 and earlier), iOS very often does not recognize an external drive at all, even through Apple's own Lightning-to-USB camera adapter: the port cannot power most drives, many formats and adapters are not accepted, and when the drive does not show up in Files it is not offered to any app either, Foldic included. This is a limit of the phone and of iOS, not a setting we can change, so Foldic on iPhone requires a USB-C model. <a href="https://www.perplexity.ai/search/a55d8d62-1600-47a7-bf2b-1e5f0432693a" rel="noopener">Background on why, in detail.</a></p>
+      <p>If you have a Mac, you are not stuck: back up from the Mac instead, following the iCloud → Mac steps <a href="#faq-old-iphone">in the answer above</a> — your albums come across with their structure intact.</p>
+    </details>
     <details id="faq-old-iphone">
       <summary>My iPhone is older and has no USB-C port (or no adapter/hub). How do I back up with Foldic — and does connecting it to my Mac by cable help?</summary>
       <p>A cable connection does <strong>not</strong> help. Importing photos from the phone into the Mac over a cable (Photos import, Image Capture, or copying to an external SSD) does not preserve your album structure — Apple flattens everything into one pile, and Foldic on the Mac only ever sees the Mac's own Photos library, not a library or loose files you put on an SSD. So that route gives you exactly what you don't want.</p>

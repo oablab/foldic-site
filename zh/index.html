@@ -390,6 +390,11 @@
       <summary>我用任何 USB 外接裝置接 iPhone／iPad，都可以拿來當 Foldic 的備份空間嗎？</summary>
       <p>可以，前提是它的檔案系統要是 iPhone 讀得懂的格式——建議格式化成 exFAT。市面上販售的外接 USB 裝置大多出廠是 Windows 用的 NTFS，iOS 完全不認得：接上去什麼都不會出現，Foldic 自然也沒地方寫。先在電腦上格式化成 exFAT 一次（Mac 用「磁碟工具程式」，選 exFAT），再接上 iPhone，它就會出現在「檔案」和 Foldic 裡。FAT32 與 APFS 也能用；exFAT 只是之後任何電腦都能直接讀的那一個。</p>
     </details>
+    <details id="faq-lightning">
+      <summary>我的 iPhone 是 Lightning 接口，可以用 Foldic 備份到外接碟嗎？</summary>
+      <p>不行，而且這部分我們沒辦法支援。Lightning 機型（iPhone 14 及更早）接外接碟時，iOS 很常完全抓不到裝置——即使用 Apple 原廠的 Lightning 對 USB 相機轉接器也一樣：接口供電不足以帶動多數硬碟、很多格式和轉接器不被接受，而只要「檔案」App 裡看不到那顆碟，iOS 就不會把它交給任何 App，Foldic 也拿不到。這是手機與 iOS 的限制，不是我們能調的設定，所以 iPhone 版 Foldic 需要 USB-C 機型。<a href="https://www.perplexity.ai/search/a55d8d62-1600-47a7-bf2b-1e5f0432693a" rel="noopener">原因的詳細說明在這裡。</a></p>
+      <p>如果你有 Mac，還是有路：改從 Mac 備份，照<a href="#faq-old-iphone">上一題</a>的 iCloud → Mac 步驟做，相簿結構會完整保留。</p>
+    </details>
     <details id="faq-old-iphone">
       <summary>我的 iPhone 比較舊、沒有 USB-C 埠（或沒有轉接／hub），要怎麼用 Foldic 備份？把手機用線接上 Mac 有幫助嗎？</summary>
       <p>用線對接<strong>沒有幫助</strong>。把手機的照片透過線材匯入 Mac（照片匯入、影像擷取，或複製到外接 SSD）並不會保留你的相簿結構——Apple 會把所有照片攤平成一堆；而 Mac 上的 Foldic 只看得到 Mac 自己的照片圖庫，看不到你放在 SSD 上的圖庫或散檔。所以這條路給你的，正好是你不想要的結果。</p>
